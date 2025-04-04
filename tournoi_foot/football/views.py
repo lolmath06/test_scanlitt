@@ -1,19 +1,23 @@
 from rest_framework import viewsets
-from .models import Equipe
-from .serializers import EquipeSerializer
+from .models import Equipe, Joueur
+from .serializers import EquipeSerializer, JoueurSerializer
 from django.shortcuts import render, redirect
-from .forms import EquipeForm
+from .forms import JoueurForm
 
 class EquipeViewSet(viewsets.ModelViewSet):
     queryset = Equipe.objects.all()
     serializer_class = EquipeSerializer
 
-def create_equipe(request):
+class JoueurViewSet(viewsets.ModelViewSet):
+    queryset = Joueur.objects.all()
+    serializer_class = JoueurSerializer
+
+def create_joueur(request):
     if request.method == 'POST':
-        form = EquipeForm(request.POST)
+        form = JoueurForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('create_equipe')  # Tu peux ajuster après
+            return redirect('create_joueur')
     else:
-        form = EquipeForm()
-    return render(request, 'football/create_equipe.html', {'form': form})
+        form = JoueurForm()
+    return render(request, 'football/create_joueur.html', {'form': form})

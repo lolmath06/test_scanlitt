@@ -1,0 +1,51 @@
+# Environnement virtuel
+env/
+venv/
+.venv/
+ENV/
+
+# Fichiers Python compilés
+*.pyc
+__pycache__/
+
+# Fichiers SQLite (base de données locale)
+*.sqlite3
+
+# Historique de migrations Django (optionnel, mais conseillé à garder pour la prod)
+#migrations/
+
+# Fichiers de logs
+*.log
+
+# Fichiers de cache Django
+*.cache
+
+# Dossier de média local et uploads
+media/
+uploads/
+
+# Dossier de fichiers statiques collectés
+staticfiles/
+
+# IDE (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Fichiers locaux et secrets
+.env
+secrets.json
+*.key
+*.pem
+
+# Docker (optionnel si utilisé plus tard)
+docker-compose.override.yml
+docker-compose.dev.yml

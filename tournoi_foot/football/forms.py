@@ -9,4 +9,4 @@ class EquipeForm(ModelForm):
 class JoueurForm(ModelForm):
     class Meta:
         model = Joueur
-        fields = ['nom', 'poste']
+        fields = ['nom', 'poste', 'equipe']

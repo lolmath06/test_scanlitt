@@ -10,3 +10,9 @@ class JoueurSerializer(serializers.ModelSerializer):
     class Meta:
         model = Joueur
         fields = '__all__'
+
+    def validate(self, data):
+        equipe = data.get('equipe')
+        if equipe.joueurs.count() >= 11:
+            raise serializers.ValidationError("Cette équipe a déjà 11 joueurs.")
+        return data

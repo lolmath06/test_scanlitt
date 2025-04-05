@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Equipe, Joueur
+from .models import Equipe, Joueur, Match
 
 class EquipeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +16,8 @@ class JoueurSerializer(serializers.ModelSerializer):
         if equipe.joueurs.count() >= 11:
             raise serializers.ValidationError("Cette équipe a déjà 11 joueurs.")
         return data
+
+class MatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Match
+        fields = '__all__'

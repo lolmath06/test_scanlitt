@@ -1,27 +1,10 @@
-version: '3.8'
+version: '3.9'
 
 services:
   web:
     build: .
-    command: gunicorn tournoi_foot.wsgi:application --bind 0.0.0.0:8000
-    volumes:
-      - .:/app
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-      - elasticsearch
-
-  db:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_DB: footdb
-      POSTGRES_USER: footuser
-      POSTGRES_PASSWORD: footpass
-
-  elasticsearch:
-    image: elasticsearch:8.13.0
-    environment:
-      discovery.type: single-node
-    ports:
-      - "9200:9200"
+    volumes:
+      - .:/app
+    command: python manage.py runserver 0.0.0.0:8000

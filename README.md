@@ -15,6 +15,7 @@ Application web de gestion de tournoi de football, développée en Python avec D
   - 0 pt pour défaite
 - Calcul dynamique du classement selon les règles
 - Interface API REST (DRF) + formulaire HTML pour ajouter un joueur
+- Limitation automatique à 11 joueurs par équipe
 
 ---
 
@@ -74,10 +75,10 @@ python manage.py runserver
 
 ## 🌟 Bonus possibles
 
-- [x] Validation du nombre de joueurs par équipe (max 11)
-- [ ] Intégration Elasticsearch pour recherche avancée (non activé ici)
-- [ ] Dockerisation de l’application
-- [ ] Interface frontend enrichie (Bootstrap, Vue, React...)
+- [x] Dockerisation de l’application
+- [x] Interface frontend enrichie avec Bootstrap
+- [ ] Intégration Vue ou React (non faite)
+- [ ] Intégration Elasticsearch pour recherche avancée
 
 ---
 
@@ -90,13 +91,43 @@ python manage.py test football
 
 ---
 
-## 🚀 Déploiement
+## 🚀 Déploiement (Docker)
 
-Tu peux facilement ajouter un fichier `Dockerfile` et `docker-compose.yml` si besoin. (dispo sur demande)
+### 1. Fichier `Dockerfile`
+```Dockerfile
+# Dockerfile
+FROM python:3.9
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /code
+
+COPY requirements.txt /code/
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+COPY . /code/
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+### 2. Fichier `docker-compose.yml`
+```yaml
+version: '3.9'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    command: python manage.py runserver 0.0.0.0:8000
+```
+
+### 3. Démarrage avec Docker :
+```bash
+docker-compose up --build
+```
 
 ---
-
-## 📃 Licence
-
-Ce projet est open-source. Utilisable et modifiable librement.
-
